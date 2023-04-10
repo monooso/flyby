@@ -1,0 +1,38 @@
+version: '3.8'
+name: flyby
+
+services:
+  reverse-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: reverse-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    network_mode: bridge
+
+  ssl-certificates:
+    image: nginxproxy/acme-companion
+    container_name: ssl-certificates
+    volumes:
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - DEFAULT_MAIL=${SSL_CERTIFICATES_EMAIL}
+      - NGINX_PROXY_CONTAINER=reverse-proxy
+    network_mode: bridge
+
+volumes:
+  conf:
+  vhost:
+  html:
+  certs:
+  acme:
