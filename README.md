@@ -9,12 +9,11 @@ For dumb side-projects, Fly isn't so great. The free tier can handle a basic Pho
 Flyby is an attempt to fill this gap. You can set it up on a $20 / month DO droplet, and host as many dumb Phoenix applications as your heart desires. Probably. I have no idea, it's an experiment.
 
 ## Getting started
-At some point I may attempt to automate this, but for now there are a few manual steps to get up and running.
 
 1. Create an Ubuntu 22.10 Digital Ocean droplet. I've been using a 2GB / 2 AMD CPU droplet, but you could probably get away with less.
 2. SSH into your fancy new faux server.
-3. Install Docker as per [the official documentation](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository). Note that you _do not_ want Docker Desktop.
-4. Clone this repository: `git@github.com:monooso/flyby.git`.
-5. Launch your digital empire: `cd flyby && docker compose up -d`.
+3. Clone this repository: `git clone git@github.com:monooso/flyby.git`.
+4. Run the bootstrap script: `cd flyby && bash bootstrap.sh`.
+5. Launch your digital empire: `docker compose up -d`.
 
 [^other-providers]: Other hosting companies are available. I've only tried this on Digital Ocean, but there's no reason why it wouldn't work on Hetzner, Linode, etc.
