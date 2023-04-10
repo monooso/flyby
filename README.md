@@ -8,12 +8,19 @@ For dumb side-projects, Fly isn't so great. The free tier can handle a basic Pho
 
 Flyby is an attempt to fill this gap. You can set it up on a $20 / month DO droplet, and host as many dumb Phoenix applications as your heart desires. Probably. I have no idea, it's an experiment.
 
-## Getting started
+## Quick start
 
 1. Create an Ubuntu 22.10 Digital Ocean droplet. I've been using a 2GB / 2 AMD CPU droplet, but you could probably get away with less.
 2. SSH into your fancy new faux server.
 3. Clone this repository: `git clone git@github.com:monooso/flyby.git`.
 4. Run the bootstrap script: `cd flyby && bash bootstrap.sh`.
-5. Launch your digital empire: `docker compose up -d`.
+5. Set the environment variables (see below).
+6. Launch your digital empire: `docker compose up -d`.
+
+## Environment variables
+Flyby relies on a couple of environment variables.
+
+- `SSL_CERTIFICATES_EMAIL`: if something goes south with your SSL certificates, LetsEncrypt will send an email to this address ([allegedly](https://github.com/nginx-proxy/acme-companion#step-2---acme-companion)).
+- `FLYBY_POSTGRES_PASSWORD`: the PostgreSQL superuser password.
 
 [^other-providers]: Other hosting companies are available. I've only tried this on Digital Ocean, but there's no reason why it wouldn't work on Hetzner, Linode, etc.
