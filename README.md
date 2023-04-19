@@ -38,12 +38,12 @@ git clone git@github.com:mycoolusername/mycoolsite.git
 # Build the site. Accepts the directory name, and the generated image name.
 # The generated image name should match the `app` image name in the site's `docker-compose.yml`.
 # Do not include the tag (we always use `latest`).
-build-site mycoolsite mycoolusername/mycoolsite
+flyby build mycoolsite mycoolusername/mycoolsite
 
 # Start the site. Runs `docker compose -f ./mycoolsite/docker-compose.yml up -d`.
-start-site mycoolsite
+flyby start mycoolsite
 
-# Restarts the flyby containers, so the nginx proxy picks up the new site
+# Restart the flyby containers, so the nginx proxy picks up the new site
 cd flyby && docker compose down && docker compose up -d
 ```
 
@@ -51,5 +51,5 @@ cd flyby && docker compose down && docker compose up -d
 
 ```bash
 cd ~
-update-site mycoolsite
+flyby update mycoolsite mycoolusername/mycoolsite
 ```

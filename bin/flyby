@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+COMMAND=$1
+SITE_NAME=$2
+IMAGE_NAME=$3
+
+if [[ -z "$COMMAND" ]]; then
+    echo "Please provide a command (build, start, stop, or update)."
+    exit 1
+fi
+
+if [[ -z "$SITE_NAME" ]]; then
+    echo "Please provide a site name (e.g. mycoolsite)."
+    exit 1
+fi
+
+# Build.
+if [[ $COMMAND == "build" ]]; then
+  if [[ -z "$IMAGE_NAME" ]]; then
+      echo "Please provide an image name (e.g. monooso/mycoolsite)."
+      exit 1
+  fi
+
+  docker build --tag ${IMAGE_NAME}:latest ./${SITE_NAME}
+  exit 0
+fi
+
+# Start.
+if [[ $COMMAND == "start" ]]; then
+  docker compose -f ${SITE_NAME}/docker-compose.yml up -d
+  exit 0
+fi
+
+# Stop.
+if [[ $COMMAND == "stop" ]]; then
+  docker compose -f ${SITE_NAME}/docker-compose.yml down --remove-orphans
+  exit 0
+fi
+
+# Update.
+if [[ $COMMAND == "update" ]]; then
+  if [[ -z "$IMAGE_NAME" ]]; then
+      echo "Please provide an image name (e.g. monooso/mycoolsite)."
+      exit 1
+  fi
+
+  cd $SITE_NAME && git pull origin main
+  cd .. \
+    && flyby build $SITE_NAME $IMAGE_NAME \
+    && flyby stop $SITE_NAME \
+    && flyby start $SITE_NAME
+
+  exit 0
+fi
