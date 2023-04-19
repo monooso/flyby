@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+SITE_NAME="$1"
+docker compose -f ${SITE_NAME}/docker-compose.yml up -d

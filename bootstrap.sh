@@ -15,3 +15,10 @@ echo \
 
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Link the bash scripts
+sudo ln ./bin/build-site /usr/local/bin/build-site
+sudo ln ./bin/start-site /usr/local/bin/start-site
+sudo ln ./bin/stop-site /usr/local/bin/stop-site
+sudo ln ./bin/update-site /usr/local/bin/update-site
+
