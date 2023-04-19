@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
 SITE_NAME="$1"
-docker build --tag ${SITE_NAME}:latest ./${SITE_NAME}
+IMAGE_NAME="$2"
+
+docker build --tag ${IMAGE_NAME}:latest ./${SITE_NAME}

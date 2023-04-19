@@ -31,13 +31,19 @@ Flyby relies on a couple of environment variables.
 
 ```bash
 cd ~
-git clone git@github.com:username/mycoolsite.git
+git clone git@github.com:mycoolusername/mycoolsite.git
 
 # Build and start the site using the helper scripts that bootstrap.sh added to /usr/local/bin
-build-site mycoolsite
+
+# Build the site. Accepts the directory name, and the generated image name.
+# The generated image name should match the `app` image name in the site's `docker-compose.yml`.
+# Do not include the tag (we always use `latest`).
+build-site mycoolsite mycoolusername/mycoolsite
+
+# Start the site. Runs `docker compose -f ./mycoolsite/docker-compose.yml up -d`.
 start-site mycoolsite
 
-# Restart the flyby containers, so the nginx proxy picks up the new site
+# Restarts the flyby containers, so the nginx proxy picks up the new site
 cd flyby && docker compose down && docker compose up -d
 ```
 
