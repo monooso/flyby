@@ -17,4 +17,4 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Link the bash script
-sudo rm -f /usr/local/bin/flyby && sudo ln -s ./bin/flyby /usr/local/bin/flyby
+sudo rm -f /usr/local/bin/flyby && sudo ln ./bin/flyby /usr/local/bin/flyby
