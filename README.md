@@ -24,3 +24,26 @@ Flyby relies on a couple of environment variables.
 - `FLYBY_POSTGRES_PASSWORD`: the PostgreSQL superuser password.
 
 [^other-providers]: Other hosting companies are available. I've only tried this on Digital Ocean, but there's no reason why it wouldn't work on Hetzner, Linode, etc.
+
+## Managing sites
+
+### Adding a site
+
+```bash
+cd ~
+git clone git@github.com:username/mycoolsite.git
+
+# Build and start the site using the helper scripts that bootstrap.sh added to /usr/local/bin
+build-site mycoolsite
+start-site mycoolsite
+
+# Restart the flyby containers, so the nginx proxy picks up the new site
+cd flyby && docker compose down && docker compose up -d
+```
+
+### Updating a site
+
+```bash
+cd ~
+update-site mycoolsite
+```
