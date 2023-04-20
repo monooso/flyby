@@ -18,10 +18,7 @@ Flyby is an attempt to fill this gap. You can set it up on a $20 / month DO drop
 6. Launch your digital empire: `docker compose up -d`.
 
 ## Environment variables
-Flyby relies on a couple of environment variables.
-
-- `SSL_CERTIFICATES_EMAIL`: if something goes south with your SSL certificates, LetsEncrypt will send an email to this address ([allegedly](https://github.com/nginx-proxy/acme-companion#step-2---acme-companion)).
-- `FLYBY_POSTGRES_PASSWORD`: the PostgreSQL superuser password.
+Flyby expects an environment variable named `SSL_CERTIFICATES_EMAIL`. If something goes awry with your SSL certificates [Let's Encrypt will send an email to this address](https://github.com/nginx-proxy/acme-companion#step-2---acme-companion). I think. I haven't tested it.
 
 [^other-providers]: Other hosting companies are available. I've only tried this on Digital Ocean, but there's no reason why it wouldn't work on Hetzner, Linode, etc.
 

@@ -2,15 +2,6 @@ version: '3.8'
 name: flyby
 
 services:
-  postgres:
-    image: postgres
-    container_name: postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_PASSWORD: ${FLYBY_POSTGRES_PASSWORD}
-    volumes:
-      - ./db_data:/var/lib/postgresql/data
-
   reverse-proxy:
     image: nginxproxy/nginx-proxy
     container_name: reverse-proxy
