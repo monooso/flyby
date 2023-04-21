@@ -28,8 +28,9 @@ services:
       - vhost:/etc/nginx/vhost.d
       - acme:/etc/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    env_file:
+      - docker.env
     environment:
-      DEFAULT_MAIL: ${SSL_CERTIFICATES_EMAIL}
       NGINX_PROXY_CONTAINER: reverse-proxy
 
 networks:
