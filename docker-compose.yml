@@ -35,6 +35,7 @@ services:
 
 networks:
   flyby:
+    name: flyby
 
 volumes:
   conf:
