@@ -4,6 +4,8 @@ COMMAND=$1
 SITE_NAME=$2
 IMAGE_NAME=$3
 
+export TAILSCALE_IP=$(tailscale ip -4)
+
 if [[ -z "$COMMAND" ]]; then
     echo "Please provide a command (build, start, stop, or update)."
     exit 1
