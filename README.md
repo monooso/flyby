@@ -1,6 +1,8 @@
 # Flyby
 An experiment in self-hosting multiple Phoenix applications on a basic Digital Ocean droplet[^other-providers]. Only a fool would use this for a mission-critical application.
 
+[^other-providers]: Other hosting companies are available. I've only tried this on Digital Ocean, but there's no reason why it wouldn't work on Hetzner, Linode, etc.
+
 ## Motivation
 PaaS solutions such as [Fly.io](https://fly.io) are great for serious applications. If that's what you're building, you should use such a service.
 
@@ -18,9 +20,7 @@ Flyby is an attempt to fill this gap. You can set it up on a $20 / month DO drop
 6. Launch your digital empire: `docker compose up -d`.
 
 ## Environment variables
-Flyby expects an environment variable named `SSL_CERTIFICATES_EMAIL`. If something goes awry with your SSL certificates [Let's Encrypt will send an email to this address](https://github.com/nginx-proxy/acme-companion#step-2---acme-companion). I think. I haven't tested it.
-
-[^other-providers]: Other hosting companies are available. I've only tried this on Digital Ocean, but there's no reason why it wouldn't work on Hetzner, Linode, etc.
+Copy the `docker.env.example` file to `docker.env`. Set the `DEFAULT_EMAIL` environment variable to a valid email address. If something goes awry with your SSL certificates [Let's Encrypt will send an email to this address](https://github.com/nginx-proxy/acme-companion#step-2---acme-companion).
 
 ## Managing sites
 
@@ -30,8 +30,6 @@ Flyby expects an environment variable named `SSL_CERTIFICATES_EMAIL`. If somethi
 cd ~
 git clone git@github.com:mycoolusername/mycoolsite.git
 
-# Build and start the site using the helper scripts that bootstrap.sh added to /usr/local/bin
-
 # Build the site. Accepts the directory name, and the generated image name.
 # The generated image name should match the `app` image name in the site's `docker-compose.yml`.
 # Do not include the tag (we always use `latest`).
@@ -39,9 +37,6 @@ flyby build mycoolsite mycoolusername/mycoolsite
 
 # Start the site. Runs `docker compose -f ./mycoolsite/docker-compose.yml up -d`.
 flyby start mycoolsite
-
-# Restart the flyby containers, so the nginx proxy picks up the new site
-cd flyby && docker compose down && docker compose up -d
 ```
 
 ### Updating a site
