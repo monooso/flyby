@@ -16,5 +16,9 @@ echo \
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+# Install Tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
+tailscale up --ssh
+
 # Link the bash script
 sudo rm -f /usr/local/bin/flyby && sudo ln ./bin/flyby /usr/local/bin/flyby
